@@ -20,4 +20,4 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to the Investment Fund APP"}
+    return {"message": "Choose your stocks"}
