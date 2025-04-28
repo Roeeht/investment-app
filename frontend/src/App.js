@@ -10,7 +10,7 @@ const Card = ({ title }) => {
   return (
     <div className='card'>
       <h1>{title}</h1>
-      <button onClick={() => setAdded(!added)}>
+      <button className='button' onClick={() => setAdded(!added)}>
         {added ? "added" : "not added"}
       </button>
     </div>

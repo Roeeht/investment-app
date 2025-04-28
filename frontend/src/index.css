@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  flex-direction: column;
 }
 
 body {
@@ -30,13 +31,14 @@ h1 {
   background-color: #31363f;
   border-radius: 10px;
   min-height: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 .button {
   border: none;
   font-size: 30px;
-  background-color: transparent;
-  width: 100%;
-  text-align: right;
   cursor: pointer;
+  align-self: flex-end;
+  width: auto;
 }
