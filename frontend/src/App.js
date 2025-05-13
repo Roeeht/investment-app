@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const Card = ({ title }) => {
+const Card = () => {
   const [added, setAdded] = useState(false);
   const [stock, setStock] = useState({});
+  const [title, setTitle] = useState("");
 
   useEffect(() => {
     console.log(`Has ${title} been added? ${added}`);
@@ -16,6 +17,7 @@ const Card = ({ title }) => {
       )
       .then((response) => {
         setStock(response);
+        setTitle(response?.data?.[0]?.name);
         console.log(response);
       });
   }, []);
@@ -32,12 +34,9 @@ const Card = ({ title }) => {
 };
 
 function App() {
-  const [title, setTitle] = useState("");
-
   return (
     <div className="card-container">
-      <h1>{title}</h1>
-      <Card title="s&p500" />
+      <Card />
     </div>
   );
 }
