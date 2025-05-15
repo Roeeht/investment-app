@@ -18,6 +18,7 @@ app.add_middleware(
 )
 
 
-@app.get("/")
-def read_root():
-    return {"message": "Choose your stocks"}
+@app.get("/api")
+def read_api():
+    return {"message": "Hello from the API!"}
+
