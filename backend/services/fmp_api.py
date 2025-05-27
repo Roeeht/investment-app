@@ -1,12 +1,12 @@
 import requests
-from config import API_KEY
+from config import API_KEY as FMP_API_KEY
 
 def fetch_stock_quote(symbol: str):
-    if not API_KEY:
+    if not FMP_API_KEY:
         print("❌ API_KEY is missing")
-    print(f"🔍 Fetching stock for symbol: {symbol} using key: {API_KEY[:4]}...")
+    print(f"🔍 Fetching stock for symbol: {symbol} using key: {FMP_API_KEY[:4]}...")
 
-    url = f"https://financialmodelingprep.com/stable/quote?symbol={symbol}&&apikey={API_KEY}"
+    url = f"https://financialmodelingprep.com/stable/quote?symbol={symbol}&&apikey={FMP_API_KEY}"
     response = requests.get(url)
     try:
         response.raise_for_status()
