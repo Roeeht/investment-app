@@ -13,6 +13,7 @@ const Card = () => {
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/stock?symbol=AAPL")
+      //change symbol to index instead of stock
       .then((response) => {
         setStock(response);
         setTitle(response?.data?.[0]?.name);

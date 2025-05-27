@@ -1,7 +1,7 @@
 import requests
 from config import API_KEY as FMP_API_KEY
 
-def fetch_stock_quote(symbol: str):
+def fetch_stock(symbol: str):
     if not FMP_API_KEY:
         print("❌ API_KEY is missing")
     print(f"🔍 Fetching stock for symbol: {symbol} using key: {FMP_API_KEY[:4]}...")
