@@ -1,4 +1,4 @@
-#!/home/roeeht/Documents/investment-app/backend/venv/bin/python3
+#!/Users/roeehabari-tamir/Documents/repos/investment-app/backend/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

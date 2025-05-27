@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes import backend_api
 
 app = FastAPI()
+
+app.include_router(backend_api.router)
+
 
 # Add CORS middleware
 origins = [
@@ -16,9 +20,3 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
-
-
-@app.get("/api")
-def read_api():
-    return {"message": "Hello from the API!"}
-
