@@ -1,14 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routes import backend_api
-from db.database import engine
+from db.database import Base, engine
 from db import models
 
-models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
-app.include_router(backend_api.router)
+Base.metadata.create_all(bind=engine)
+
+app.include_router(backend_api.router, prefix="/api")
 
 
 # Add CORS middleware
@@ -24,3 +25,8 @@ app.add_middleware(
     allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
+
+
+@app.get("/")
+def read_root():
+    return {"message": "Investment App API"}
