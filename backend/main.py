@@ -26,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-
+#health check endpoint
 @app.get("/")
 def read_root():
     return {"message": "Investment App API"}

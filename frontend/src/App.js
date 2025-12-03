@@ -1,10 +1,15 @@
-import Card from  "./components/Card.js";
-
+import React from "react";
+import Navigation from "./components/common/Navigation";
+import Dashboard from "./pages/Dashboard";
+import "./style/index.css";
 
 function App() {
   return (
-    <div className="card-container">
-      <Card />
+    <div className="app">
+      <Navigation />
+      <main className="main-content">
+        <Dashboard />
+      </main>
     </div>
   );
 }

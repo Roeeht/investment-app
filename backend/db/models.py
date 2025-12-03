@@ -11,33 +11,36 @@ class User(Base):
     password_hash = Column(String, nullable=False)
     created_at = Column(TIMESTAMP)
 
+    #  relationship
     deposits = relationship("Deposit", back_populates="user", cascade="all, delete")
     purchases = relationship("Purchase", back_populates="user", cascade="all, delete")
-    stocks = relationship("UserStock", back_populates="user", cascade="all, delete")
+    user_stocks = relationship("UserStock", back_populates="user", cascade="all, delete")
 
-class Stock(Base):
-    __tablename__ = "stocks"
-    id = Column(Integer, primary_key=True)
-    symbol = Column(String, unique=True, nullable=False)
-    name = Column(String, nullable=False)
-    exchange = Column(String)
-
-    users = relationship("UserStock", back_populates="stock")
-    purchases = relationship("Purchase", back_populates="stock")
 
 class UserStock(Base):
     __tablename__ = "user_stocks"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"))
-    stock_id = Column(Integer, ForeignKey("stocks.id"))
+    
+    index_name = Column(String, nullable=False)  # Store symbol directly instead of stock_id
+    fund_number = Column(String, nullable=False)
+    theoretical_precentage = Column(Numeric(2, 0))
+    actual_precentage = Column(Numeric(2, 0))
+    funds_spent = Column(Numeric(12, 2))
+    theoretical_invested_money = Column(Numeric(12, 2))
+    invested_money_balance = Column(Numeric(12, 2))
+    link_to_etf_provider = Column(String)
+    avg_purchase_stock_price = Column(Numeric(12, 2))
+    comments = Column(String)
 
-    user = relationship("User", back_populates="stocks")
-    stock = relationship("Stock", back_populates="users")
+    #  relationship
+    user = relationship("User", back_populates="user_stocks")
 
 class Deposit(Base):
     __tablename__ = "deposits"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"))
+    
     amount = Column(Numeric(12, 2))
     date = Column(Date)
 
@@ -47,10 +50,12 @@ class Purchase(Base):
     __tablename__ = "purchases"
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id"))
-    stock_id = Column(Integer, ForeignKey("stocks.id"))
-    quantity = Column(Numeric(12, 4))
-    price_per_share = Column(Numeric(12, 2))
+    
     date = Column(Date)
+    stock_type = Column(String, nullable=False)  # Store symbol directly instead of stock_id
+    amount_of_stocks = Column(Numeric(12, 4))
+    price_per_stock = Column(Numeric(12, 2))
+    fee = Column(Numeric(12, 3))
+    total_purchase = Column(Numeric(12, 2))
 
     user = relationship("User", back_populates="purchases")
-    stock = relationship("Stock", back_populates="purchases")
